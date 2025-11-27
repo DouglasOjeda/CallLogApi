@@ -1,0 +1,7 @@
+package com.douglasojeda.calllog.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PhoneNumberController {
+}
