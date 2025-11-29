@@ -38,7 +38,8 @@ public class Call {
 
     public Call() {}
 
-    public Call(long callId, String createdAt, String answeredAt, String endedAt, CallStatus status, User caller, User recipient, PhoneNumber fromNumber, PhoneNumber toNumber) {
+    public Call(long callId, String createdAt, String answeredAt, String endedAt, CallStatus status, User caller,
+                User recipient, PhoneNumber fromNumber, PhoneNumber toNumber) {
         this.callId = callId;
         this.createdAt = createdAt;
         this.answeredAt = answeredAt;
