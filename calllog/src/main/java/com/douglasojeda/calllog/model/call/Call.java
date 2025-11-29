@@ -3,7 +3,6 @@ package com.douglasojeda.calllog.model.call;
 import com.douglasojeda.calllog.model.phonenumber.PhoneNumber;
 import com.douglasojeda.calllog.model.user.User;
 import jakarta.persistence.*;
-import org.springframework.stereotype.Component;
 
 /**
  * Represents a single call in the call log system, including participants,
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class Call {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long callId;
     private String createdAt;
     private String answeredAt;
     private String endedAt;
@@ -39,8 +38,8 @@ public class Call {
 
     public Call() {}
 
-    public Call(long id, String createdAt, String answeredAt, String endedAt, CallStatus status, User caller, User recipient, PhoneNumber fromNumber, PhoneNumber toNumber) {
-        this.id = id;
+    public Call(long callId, String createdAt, String answeredAt, String endedAt, CallStatus status, User caller, User recipient, PhoneNumber fromNumber, PhoneNumber toNumber) {
+        this.callId = callId;
         this.createdAt = createdAt;
         this.answeredAt = answeredAt;
         this.endedAt = endedAt;
@@ -53,12 +52,12 @@ public class Call {
 
     // Getters and setters below
 
-    public long getId() {
-        return id;
+    public long getCallId() {
+        return callId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCallId(long callId) {
+        this.callId = callId;
     }
 
     public String getCreatedAt() {

@@ -2,7 +2,6 @@ package com.douglasojeda.calllog.model.phonenumber;
 
 import com.douglasojeda.calllog.model.user.User;
 import jakarta.persistence.*;
-import org.springframework.stereotype.Component;
 
 /**
  * Represents a phone number in the call log system.
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Table(name = "phone_numbers")
 public class PhoneNumber {
     @Id
-    private long id;
+    private long phoneNumberId;
     private String phoneNumber;
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -19,20 +18,20 @@ public class PhoneNumber {
 
     public PhoneNumber() {}
 
-    public PhoneNumber(long id, String phoneNumber, User owner) {
-        this.id = id;
+    public PhoneNumber(long phoneNumberId, String phoneNumber, User owner) {
+        this.phoneNumberId = phoneNumberId;
         this.phoneNumber = phoneNumber;
         this.owner = owner;
     }
 
     // Getters and setters below
 
-    public long getId() {
-        return id;
+    public long getPhoneNumberId() {
+        return phoneNumberId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPhoneNumberId(long phoneNumberId) {
+        this.phoneNumberId = phoneNumberId;
     }
 
     public String getPhoneNumber() {

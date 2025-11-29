@@ -1,7 +1,5 @@
 package com.douglasojeda.calllog.model.user;
 
-import com.douglasojeda.calllog.model.call.Call;
-import com.douglasojeda.calllog.model.phonenumber.PhoneNumber;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long userId;
     private String displayName;
 
     @ManyToMany
@@ -30,20 +28,20 @@ public class User {
 
     }
 
-    public User(long id, String displayName, List<User> contacts) {
-        this.id = id;
+    public User(long userId, String displayName, List<User> contacts) {
+        this.userId = userId;
         this.displayName = displayName;
         this.contacts = contacts;
     }
 
     // Getters and setters below
 
-    public long getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getDisplayName() {
