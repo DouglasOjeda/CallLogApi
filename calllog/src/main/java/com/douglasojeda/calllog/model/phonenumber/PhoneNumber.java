@@ -17,15 +17,15 @@ public class PhoneNumber {
     @JoinColumn(name = "owner_id")
     private User owner;
 
+    public PhoneNumber() {}
+
     public PhoneNumber(long id, String phoneNumber, User owner) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.owner = owner;
     }
 
-    public PhoneNumber() {
-
-    }
+    // Getters and setters below
 
     public long getId() {
         return id;

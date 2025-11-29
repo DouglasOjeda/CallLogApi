@@ -37,6 +37,22 @@ public class Call {
     @JoinColumn(name = "to_number_id")
     private PhoneNumber toNumber;
 
+    public Call() {}
+
+    public Call(long id, String createdAt, String answeredAt, String endedAt, CallStatus status, User caller, User recipient, PhoneNumber fromNumber, PhoneNumber toNumber) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.answeredAt = answeredAt;
+        this.endedAt = endedAt;
+        this.status = status;
+        this.caller = caller;
+        this.recipient = recipient;
+        this.fromNumber = fromNumber;
+        this.toNumber = toNumber;
+    }
+
+    // Getters and setters below
+
     public long getId() {
         return id;
     }
