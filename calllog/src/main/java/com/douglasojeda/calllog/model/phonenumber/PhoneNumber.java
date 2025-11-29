@@ -1,21 +1,30 @@
 package com.douglasojeda.calllog.model.phonenumber;
 
 import com.douglasojeda.calllog.model.user.User;
+import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 /**
  * Represents a phone number in the call log system.
  */
+@Entity
+@Table(name = "phone_numbers")
 public class PhoneNumber {
-
-    /** Unique identifier for this phone number record. */
+    @Id
     private long id;
     private String phoneNumber;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
     private User owner;
 
     public PhoneNumber(long id, String phoneNumber, User owner) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.owner = owner;
+    }
+
+    public PhoneNumber() {
+
     }
 
     public long getId() {

@@ -2,21 +2,39 @@ package com.douglasojeda.calllog.model.call;
 
 import com.douglasojeda.calllog.model.phonenumber.PhoneNumber;
 import com.douglasojeda.calllog.model.user.User;
+import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 /**
  * Represents a single call in the call log system, including participants,
  * phone numbers, timestamps, and current status.
  */
+@Entity
+@Table(name = "calls")
 public class Call {
-    /** Unique identifier for this call record. */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String createdAt;
     private String answeredAt;
     private String endedAt;
+
+    @Enumerated(EnumType.STRING)
     private CallStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "caller_id")
     private User caller;
+
+    @ManyToOne
+    @JoinColumn(name = "recipient_id")
     private User recipient;
+
+    @ManyToOne
+    @JoinColumn(name = "from_number_id")
     private PhoneNumber fromNumber;
+    @ManyToOne
+    @JoinColumn(name = "to_number_id")
     private PhoneNumber toNumber;
 
     public long getId() {

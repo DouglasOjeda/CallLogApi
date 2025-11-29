@@ -2,6 +2,7 @@ package com.douglasojeda.calllog.model.user;
 
 import com.douglasojeda.calllog.model.call.Call;
 import com.douglasojeda.calllog.model.phonenumber.PhoneNumber;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -9,22 +10,30 @@ import java.util.List;
  * Represents a user in the call log system, including their display name,
  * associated contacts, call history, and phone numbers.
  */
+@Entity
+@Table(name = "users")
 public class User {
-
-    /** Unique identifier for this user. */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String displayName;
-    private User contacts;
-    private List<Call> callLog;
-    private List<PhoneNumber> phoneNumbers;
 
-    public User(long id, String displayName, User contacts, List<Call> callLog, List<PhoneNumber> phoneNumbers) {
+    @ManyToMany
+    @JoinTable(
+            name = "user_contacts",
+            joinColumns = @JoinColumn(name = "user_id"),          // FK to this User
+            inverseJoinColumns = @JoinColumn(name = "contact_id") // FK to contact User
+    )
+    private List<User> contacts;
+
+    public User() {
+
+    }
+
+    public User(long id, String displayName, List<User> contacts) {
         this.id = id;
         this.displayName = displayName;
         this.contacts = contacts;
-        this.callLog = callLog;
-        this.phoneNumbers = phoneNumbers;
     }
 
     // Getters and setters below
@@ -45,27 +54,11 @@ public class User {
         this.displayName = displayName;
     }
 
-    public User getContacts() {
+    public List<User> getContacts() {
         return contacts;
     }
 
-    public void setContacts(User contacts) {
+    public void setContacts(List<User> contacts) {
         this.contacts = contacts;
-    }
-
-    public List<Call> getCallLog() {
-        return callLog;
-    }
-
-    public void setCallLog(List<Call> callLog) {
-        this.callLog = callLog;
-    }
-
-    public List<PhoneNumber> getPhoneNumbers() {
-        return phoneNumbers;
-    }
-
-    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
-        this.phoneNumbers = phoneNumbers;
     }
 }
