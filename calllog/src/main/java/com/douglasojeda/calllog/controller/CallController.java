@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 public class CallController {
-
     private final CallService callService;
 
     @Autowired
