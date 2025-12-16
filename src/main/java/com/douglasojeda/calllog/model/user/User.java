@@ -13,7 +13,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private Long userId;
     private String displayName;
 
     @ManyToMany
@@ -28,7 +28,7 @@ public class User {
 
     }
 
-    public User(long userId, String displayName, List<User> contacts) {
+    public User(Long userId, String displayName, List<User> contacts) {
         this.userId = userId;
         this.displayName = displayName;
         this.contacts = contacts;
@@ -36,11 +36,11 @@ public class User {
 
     // Getters and setters below
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

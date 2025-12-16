@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 @Table(name = "phone_numbers")
 public class PhoneNumber {
     @Id
-    private long phoneNumberId;
+    private Long phoneNumberId;
     private String phoneNumber;
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -18,7 +18,7 @@ public class PhoneNumber {
 
     public PhoneNumber() {}
 
-    public PhoneNumber(long phoneNumberId, String phoneNumber, User owner) {
+    public PhoneNumber(Long phoneNumberId, String phoneNumber, User owner) {
         this.phoneNumberId = phoneNumberId;
         this.phoneNumber = phoneNumber;
         this.owner = owner;
@@ -26,11 +26,11 @@ public class PhoneNumber {
 
     // Getters and setters below
 
-    public long getPhoneNumberId() {
+    public Long getPhoneNumberId() {
         return phoneNumberId;
     }
 
-    public void setPhoneNumberId(long phoneNumberId) {
+    public void setPhoneNumberId(Long phoneNumberId) {
         this.phoneNumberId = phoneNumberId;
     }
 

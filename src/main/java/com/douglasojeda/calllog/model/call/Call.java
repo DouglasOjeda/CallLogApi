@@ -13,7 +13,7 @@ import jakarta.persistence.*;
 public class Call {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long callId;
+    private Long callId;
     private String createdAt;
     private String answeredAt;
     private String endedAt;
@@ -38,7 +38,7 @@ public class Call {
 
     public Call() {}
 
-    public Call(long callId, String createdAt, String answeredAt, String endedAt, CallStatus status, User caller,
+    public Call(Long callId, String createdAt, String answeredAt, String endedAt, CallStatus status, User caller,
                 User recipient, PhoneNumber fromNumber, PhoneNumber toNumber) {
         this.callId = callId;
         this.createdAt = createdAt;
@@ -53,11 +53,11 @@ public class Call {
 
     // Getters and setters below
 
-    public long getCallId() {
+    public Long getCallId() {
         return callId;
     }
 
-    public void setCallId(long callId) {
+    public void setCallId(Long callId) {
         this.callId = callId;
     }
 
