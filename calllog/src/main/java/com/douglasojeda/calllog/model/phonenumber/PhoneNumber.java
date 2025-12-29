@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 @Table(name = "phone_numbers")
 public class PhoneNumber {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long phoneNumberId;
     private String phoneNumber;
     @ManyToOne
