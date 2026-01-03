@@ -7,11 +7,8 @@ import java.util.List;
 
 public class UserMapper {
     public static UserResponse toResponse(User user) {
-        List<Long> contactIds = user.getContacts() == null
-                ? List.of()
-                : user.getContacts().stream()
-                .map(User::getUserId)
-                .toList();
+        List<Long> contactIds = user.getContacts().stream()
+                .map(User::getUserId).toList();
         return new UserResponse(user.getUserId(), user.getDisplayName(), contactIds);
     }
 }
