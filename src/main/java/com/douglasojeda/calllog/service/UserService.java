@@ -1,5 +1,6 @@
 package com.douglasojeda.calllog.service;
 
+import com.douglasojeda.calllog.exception.NotFoundException;
 import com.douglasojeda.calllog.model.user.User;
 import com.douglasojeda.calllog.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -23,7 +24,7 @@ public class UserService {
 
     public User getUserById (Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found: " + id));
+                .orElseThrow(() -> new NotFoundException("User not found: " + id));
     }
 
     @Transactional
@@ -42,7 +43,7 @@ public class UserService {
     @Transactional
     public void deleteUserById(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found: " + id);
+            throw new NotFoundException("User not found: " + id);
         }
         userRepository.deleteById(id);
     }
