@@ -22,36 +22,47 @@ public class UserService {
     }
 
     public User getUserById (Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found: " + id));
     }
 
+    @Transactional
     public User addUser(String displayName) {
         User user = new User(displayName);
         return userRepository.save(user);
     }
 
-    public User updateUser(User user) {
-        return userRepository.save(user);
+    @Transactional
+    public User updateUser(Long id, String displayName) {
+        User u = getUserById(id);
+        u.setDisplayName(displayName);
+        return userRepository.save(u);
     }
 
+    @Transactional
     public void deleteUserById(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("User not found: " + id);
+        }
         userRepository.deleteById(id);
     }
 
     @Transactional
-    public User addContact(Long userId, Long contactId) {
+    public void addContact(Long userId, Long contactId) {
         if (userId.equals(contactId)) {
-            throw new IllegalArgumentException("You cannot add yourself as a contact.");
+            throw new IllegalArgumentException("Cannot add yourself as a contact.");
         }
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found: " + userId));
-        User contact = userRepository.findById(contactId)
-                .orElseThrow(() -> new RuntimeException("Contact not found: " + contactId));
-        boolean alreadyAdded = user.getContacts().stream()
-                .anyMatch(u -> u.getUserId().equals(contactId));
-        if (!alreadyAdded) {
-            user.getContacts().add(contact);
-        }
-        return userRepository.save(user);
+        User user = getUserById(userId);
+        User contact = getUserById(contactId);
+
+        user.addContact(contact);
+    }
+
+    @Transactional
+    public void removeContact(Long userId, Long contactId) {
+        User user = getUserById(userId);
+        User contact = getUserById(contactId);
+
+        user.removeContact(contact);
     }
 }

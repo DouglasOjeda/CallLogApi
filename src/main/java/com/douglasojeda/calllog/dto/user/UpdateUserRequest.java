@@ -2,5 +2,6 @@ package com.douglasojeda.calllog.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record CreateUserRequest(@NotBlank String displayName) {
+public record UpdateUserRequest(@NotBlank String displayName) {
+
 }
