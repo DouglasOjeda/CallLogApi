@@ -1,8 +1,12 @@
 package com.douglasojeda.calllog.controller;
 
+import com.douglasojeda.calllog.dto.user.CreateUserRequest;
+import com.douglasojeda.calllog.dto.user.UserResponse;
+import com.douglasojeda.calllog.mapper.user.UserMapper;
 import com.douglasojeda.calllog.model.user.User;
 import com.douglasojeda.calllog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +31,16 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserResponse addUser(@RequestBody CreateUserRequest req) {
+        User created = userService.addUser(req.displayName());
+        return UserMapper.toResponse(created);
+    }
+
+    @PostMapping("/users/{userId}/contacts/{contactId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addContact(@PathVariable Long userId, @PathVariable Long contactId) {
+        userService.addContact(userId, contactId);
     }
 
     @PutMapping("/users")
