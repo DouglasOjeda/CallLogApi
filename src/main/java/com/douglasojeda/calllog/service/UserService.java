@@ -28,7 +28,7 @@ public class UserService {
     }
 
     @Transactional
-    public User addUser(String displayName) {
+    public User createUser(String displayName) {
         User user = new User(displayName);
         return userRepository.save(user);
     }
@@ -45,6 +45,7 @@ public class UserService {
         if (!userRepository.existsById(id)) {
             throw new NotFoundException("User not found: " + id);
         }
+        userRepository.deleteUserContactsRows(id);
         userRepository.deleteById(id);
     }
 

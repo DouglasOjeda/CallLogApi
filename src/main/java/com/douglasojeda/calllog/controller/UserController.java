@@ -37,8 +37,8 @@ public class UserController {
 
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse addUser(@Valid @RequestBody CreateUserRequest req) {
-        User created = userService.addUser(req.displayName());
+    public UserResponse createUser(@Valid @RequestBody CreateUserRequest req) {
+        User created = userService.createUser(req.displayName());
         return UserMapper.toResponse(created);
     }
 
